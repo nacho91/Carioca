@@ -15,6 +15,7 @@ public class CariocaView extends View {
 
     private Particle particle;
     private Particle particle2;
+    private Particle particle3;
 
     public CariocaView(Context context) {
         this(context, null);
@@ -32,7 +33,7 @@ public class CariocaView extends View {
     private void init(){
         particle = new Particle(100, 10, 0, 2, 150, 5, Color.RED);
         particle2 = new Particle(100, 110, 2, 2, 150, 5, Color.BLUE);
-
+        particle3 = new Particle(100, 210, 2, 2, 150, 5, Color.GREEN);
     }
 
     @Override
@@ -44,6 +45,10 @@ public class CariocaView extends View {
 
         particle2.update();
         particle2.render(canvas);
+
+
+        particle3.update();
+        particle3.render(canvas);
 
         ViewCompat.postInvalidateOnAnimation(this);
     }

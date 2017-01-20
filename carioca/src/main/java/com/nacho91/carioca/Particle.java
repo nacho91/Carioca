@@ -18,6 +18,9 @@ public class Particle {
     private int size;
     private int life;
     private Paint paint;
+    private float angle = 0;
+    private float aVelocity = 0;
+    private float aAcceleration = 0.01F;
 
     public Particle(int x, int y, int dx, int dy, int size, int life, int color) {
         this.position = new Vector2d(x, y);
@@ -35,6 +38,9 @@ public class Particle {
     public boolean update(){
         velocity.add(acceleration);
         position.add(velocity);
+        aVelocity += aAcceleration;
+        angle += aVelocity;
+
         life--;
 
         return life <= 0;
@@ -43,7 +49,12 @@ public class Particle {
     public void render(Canvas canvas){
         RectF rect = new RectF(position.x-(size/2), position.y-(size/2), position.x+(size/2), position.y+(size/2));
 
+        canvas.save();
+
+        canvas.rotate(angle, position.x, position.y);
         canvas.drawArc(rect, 195, 40, false, paint);
+
+        canvas.restore();
     }
 
 }
