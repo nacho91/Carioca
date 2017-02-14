@@ -23,4 +23,23 @@ public class Vector2d {
         x += vector.x;
         y += vector.y;
     }
+
+    public void div(double num){
+        x /= num;
+        y /= num;
+    }
+
+    public void div(Vector2d vector){
+        x /= vector.x;
+        y /= vector.y;
+    }
+
+    public void mult(double num){
+        x *= num;
+        y *= num;
+    }
+
+    public Vector2d copy(){
+        return new Vector2d(x, y);
+    }
 }

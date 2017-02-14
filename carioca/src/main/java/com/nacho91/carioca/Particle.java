@@ -20,12 +20,14 @@ public class Particle {
     private Paint paint;
     private float angle = 0;
     private float aVelocity = 0;
-    private float aAcceleration = 0.01F;
+    private float aAcceleration = 0.001F;
+    private float mass;
 
-    public Particle(int x, int y, int dx, int dy, int size, int life, int color) {
+    public Particle(int x, int y, float dx, float dy, int size, int life, int color) {
         this.position = new Vector2d(x, y);
         this.velocity = new Vector2d(dx, dy);
         this.acceleration = new Vector2d(0, 0.05f);
+        this.mass = 1;
         this.size = size;
         this.life = life;
         this.paint = new Paint();
@@ -35,6 +37,12 @@ public class Particle {
         this.paint.setColor(color);
     }
 
+    public void applyForce(Vector2d force){
+        Vector2d f = force.copy();
+        f.div(mass);
+        acceleration.add(f);
+    }
+
     public boolean update(){
         velocity.add(acceleration);
         position.add(velocity);
@@ -42,6 +50,8 @@ public class Particle {
         angle += aVelocity;
 
         life--;
+
+        acceleration.mult(0);
 
         return life <= 0;
     }
@@ -56,5 +66,6 @@ public class Particle {
 
         canvas.restore();
     }
+
 
 }
